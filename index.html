@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AImpact</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+    <style>
+        .impact-text {
+            color: white;
+            font-size: 1.50rem;
+            text-align: center;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+            /* Ajuste conforme necessário */
+        }
+
+        /* Navbar fixa no topo */
+        .navbar {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1050;
+        }
+
+        /* Mensagem de campanha abaixo da navbar */
+        .campaign-message {
+            background-color: #8bc1ec;
+            /* Cor cinza Bootstrap */
+            color: white;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            position: fixed;
+            top: 56px;
+            /* Altura da navbar */
+            z-index: 1040;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        /* Classe para esconder a mensagem ao rolar */
+        .hidden {
+            opacity: 0;
+        }
+
+        /* Evita sobreposição do conteúdo com a navbar */
+        .content {
+            margin-top: 120px;
+            /* Ajuste conforme necessário */
+        }
+
+        .carousel-container {
+            margin-top: 96px;
+            /* 56px (navbar) + 40px (mensagem) */
+            height: calc(100vh - 96px);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .carousel-inner,
+        .carousel-item,
+        .carousel-inner img {
+            height: 100%;
+            object-fit: cover;
+            object-position: center top;
+            /* Ajuste o crop conforme necessário */
+        }
+
+        #carouselExample {
+            width: 100%;
+            position: relative;
+        }
+
+
+        /* Estilo para seções */
+        section {
+            min-height: 100vh;
+            /* Garante que cada seção ocupe 100% da altura da tela */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            /* Centraliza o conteúdo verticalmente */
+            align-items: center;
+            /* Centraliza o conteúdo horizontalmente */
+            text-align: center;
+            /* Centraliza o texto dentro das seções */
+        }
+
+        /* Ajuste para seções com conteúdo maior */
+        .section-content {
+            max-width: 90%;
+            /* Limita a largura máxima do conteúdo */
+            margin: 0 auto;
+        }
+
+        .nav-link-newcolor {
+            color: #53afe6;
+        }
+
+        .nav-link-newcolor:hover {
+            color: #004aad;
+        }
+
+        .navbar-nav .nav-link.active,
+        .navbar-nav .nav-link.show {
+            color: #004aad;
+        }
+
+        .nav-link:focus,
+        .nav-link:hover {
+            color: #004aad;
+        }
+
+        /* Permitir hover normal no desktop */
+        @media (min-width: 992px) {
+            .dropdown:hover .dropdown-menu {
+                display: block;
+            }
+        }
+
+        /* Manter funcionalidade de toggle no mobile */
+        .dropdown-toggle {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">
+                <img src="logo.png" alt="Logo AImpact"> <!-- Substitua 'logo.png' pelo caminho correto da imagem -->
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+                aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item">
+                        <a class="nav-link  active nav-link-newcolor" aria-current="page" href="index.html">Início</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-newcolor" href="#sobre-nos">Sobre nós</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-newcolor" href="#equipa">A nossa equipa</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle nav-link-newcolor" href="#servicos" id="navbarDropdown"
+                            role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Serviços
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <li><a class="dropdown-item nav-link-newcolor" href="standard.html">Standard</a></li>
+                            <li><a class="dropdown-item nav-link-newcolor" href="plus.html">Plus</a></li>
+                            <li><a class="dropdown-item nav-link-newcolor" href="premium.html">Premium</a></li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-newcolor" href="#contactos">Contactos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link nav-link-newcolor" href="https://www.instagram.com/_.aimpact._/"
+                            target="_blank">
+                            <i class="bi bi-instagram"></i>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mensagem de campanha (abaixo da navbar) -->
+    <div id="campaignMessage" class="campaign-message">
+        <p class="impact-text w-100 m-0">
+            Campanha de lançamento <strong>AImpact</strong> até 30%! Fale connosco...
+        </p>
+    </div>
+
+    <!-- Carousel -->
+    <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
+        <div class="carousel-inner">
+            <div class="carousel-item active"><img src="logoAntigoNovo2.jpg" class="d-block w-100" alt="Imagem 1">
+            </div>
+        </div>
+        <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Anterior</span>
+        </button>
+        <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+            <span class="carousel-control-next-icon" aria-hidden="true"></span>
+            <span class="visually-hidden">Próximo</span>
+        </button>
+    </div>
+
+    <!-- Seção Sobre Nós -->
+    <section id="sobre-nos" class="py-5">
+        <div class="section-content">
+            <h2 class="mb-5">Sobre Nós</h2>
+            <p class="lead">
+                Somos uma empresa de consultoria especializada em inteligência artificial, dedicada a ajudar
+                organizações a transformar desafios em oportunidades
+                através da inovação tecnológica. Combinamos conhecimento avançado em IA, análise de dados e automação
+                para criar soluções personalizadas que impulsionam eficiência,
+                crescimento e vantagem competitiva. O nosso compromisso é simplificar a complexidade e capacitar os
+                nossos clientes com ferramentas e estratégias de última geração.
+            </p>
+            <blockquote class="blockquote">
+                <p>Fundada por especialistas apaixonados pela tecnologia, acreditamos no poder da colaboração e da
+                    personalização.
+                    Com uma equipa multidisciplinar e comprometida, estamos prontos para enfrentar qualquer desafio e
+                    ajudar sua empresa a prosperar na era digital.</p>
+            </blockquote>
+
+            <div class="row mt-4">
+                <div class="col-md-4 d-flex">
+                    <div class="p-4 text-white rounded w-100 d-flex flex-column" style="background-color: #53afe6;">
+                        <h5>Missão</h5>
+                        <p class="flex-grow-1">Utilizar e abordar estratégias para fornecer soluções personalizadas que
+                            atendem às necessidades dos nossos clientes.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex">
+                    <div class="p-4 text-white rounded w-100 d-flex flex-column" style="background-color: #53afe6;">
+                        <h5>Visão</h5>
+                        <p class="flex-grow-1">Reconhecida como líder em consultoria de inteligência artificial,
+                            impulsionando a evolução digital e contribuindo para um futuro mais inteligente e
+                            sustentável.</p>
+                    </div>
+                </div>
+                <div class="col-md-4 d-flex">
+                    <div class="p-4 text-white rounded w-100 d-flex flex-column" style="background-color: #53afe6;">
+                        <h5>Valores</h5>
+                        <p class="flex-grow-1">Valorizamos a inovação, integridade, colaboração e excelência para
+                            impulsionar o crescimento e garantir resultados de qualidade e confiança.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção da Equipa -->
+    <section id="equipa" class="py-5 bg-light">
+        <div class="section-content">
+            <h2 class="mb-5">A Nossa Equipa</h2>
+            <div class="row g-4 justify-content-center">
+                <!-- Card 1 -->
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="rita.png" class="card-img-top" alt="Membro 1">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Ana Rita Ferreira</h5>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 2 -->
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="diana.png" class="card-img-top" alt="Membro 2">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Diana Barbosa</h5>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 3 -->
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="Eva-Photoroom.png" class="card-img-top" alt="Membro 3">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Eva Costa</h5>
+                        </div>
+                    </div>
+                </div>
+                <!-- Card 4 -->
+                <div class="col-md-3">
+                    <div class="card">
+                        <img src="SOFIA-Photoroom.png" class="card-img-top" alt="Membro 4">
+                        <div class="card-body text-center">
+                            <h5 class="card-title">Sofia Santos</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Seção de Serviços -->
+    <section id="servicos" class="py-5">
+        <div class="section-content">
+            <h2 class="mb-5">Os nossos Serviços</h2>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="imagemAI.png" class="card-img-top" alt="Serviço 1">
+                        <div class="card-body">
+                            <h5 class="card-title">Standard</h5>
+                            <a href="standard.html" class="btn btn-primary">Saber mais</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="biometrics.jpg"
+                            class="card-img-top" alt="Serviço 2">
+                        <div class="card-body">
+                            <h5 class="card-title">Plus</h5>
+                            <a href="plus.html" class="btn btn-primary">Saber mais</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+                        <img src="certo.jpg" class="card-img-top" alt="Serviço 3">
+                        <div class="card-body">
+                            <h5 class="card-title">Premium</h5>
+                            <a href="premium.html" class="btn btn-primary">Saber mais</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulário de Contato -->
+    <section id="contactos" class="py-5 bg-light">
+        <div class="container">
+            <h2 class="text-center mb-5">Entre em Contato</h2>
+            <form class="w-50 mx-auto">
+                <div class="mb-3">
+                    <label for="nome" class="form-label">Nome Completo</label>
+                    <input type="text" class="form-control" id="nome" placeholder="Seu nome completo">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" placeholder="Seu email">
+                </div>
+                <div class="mb-3">
+                    <label for="contacto" class="form-label">Contacto</label>
+                    <input type="text" class="form-control" id="contacto" placeholder="Seu número de contacto">
+                </div>
+                <div class="mb-3">
+                    <label for="mensagem" class="form-label">Mensagem</label>
+                    <textarea class="form-control" id="mensagem" rows="4" placeholder="Escreva sua mensagem"></textarea>
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Enviar</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-light py-4">
+        <div class="container text-center">
+            <p>Siga-nos nas redes sociais:</p>
+            <a href="https://www.instagram.com/_.aimpact._/" class="text-light me-3"><i class="bi bi-instagram"></i>
+                Instagram</a>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        document.querySelectorAll('a.nav-link[href^="#"]:not([data-bs-toggle="dropdown"])').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                const navbarHeight = document.querySelector('.navbar').offsetHeight; // Compensa navbar fixa
+                const targetPosition = targetElement.getBoundingClientRect().top + window.scrollY - navbarHeight;
+                const startPosition = window.scrollY;
+                const distance = targetPosition - startPosition;
+                const duration = 125; // Tempo da animação (1s)
+                let startTime = null;
+
+                function smoothScroll(currentTime) {
+                    if (startTime === null) startTime = currentTime;
+                    const elapsedTime = currentTime - startTime;
+                    const progress = Math.min(elapsedTime / duration, 1);
+                    const ease = easeInOutCubic(progress);
+
+                    window.scrollTo(0, startPosition + distance * ease);
+
+                    if (elapsedTime < duration) {
+                        requestAnimationFrame(smoothScroll);
+                    }
+                }
+
+                function easeInOutCubic(t) {
+                    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+                }
+
+                requestAnimationFrame(smoothScroll);
+            });
+        });
+
+        // Handler especial para o dropdown de Serviços
+        document.getElementById('navbarDropdown').addEventListener('click', function (e) {
+            e.preventDefault();
+
+            // Scroll para a seção
+            const target = document.querySelector(this.hash);
+            const navbarHeight = document.querySelector('.navbar').offsetHeight;
+            const campaignHeight = document.getElementById('campaignMessage').offsetHeight;
+            const targetPosition = target.offsetTop;
+
+            window.scrollTo({
+                top: targetPosition,
+                behavior: 'smooth'
+            });
+
+            // Fechar dropdown após scroll (opcional)
+            setTimeout(() => {
+                new bootstrap.Dropdown(this).toggle();
+            }, 1000);
+        });
+
+        window.addEventListener("scroll", function () {
+            var campaignMessage = document.getElementById("campaignMessage");
+
+            if (window.scrollY > 50) {
+                campaignMessage.classList.add("hidden");
+            } else {
+                campaignMessage.classList.remove("hidden");
+            }
+        });
+    </script>
+</body>
+
+</html>
